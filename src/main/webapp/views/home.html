@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,user-scalable=no" name="viewport" />
+<meta name="viewport"  
+      content="  
+        height = [pixel_value | device-height] ,  
+        width = [pixel_value | device-width ] ,  
+        initial-scale = 0.5,  
+        minimum-scale = float_value ,  
+        
+        user-scalable = yes ,  
+      "  
+        
+    />   
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" name="viewport"/>
+<!-- Mobile Devices Support @begin -->
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type"/>
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="pragma"/>
+<meta content="0" http-equiv="expires"/>
+<meta content="telephone=no, address=no" name="format-detection"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />    
+    
+
+<title>展会首页</title>
+<link href="../css/exhibition.css" type="text/css" rel="stylesheet" />
+<link href="../css/index.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/a.js" language="javascript" async="async"></script>
+
+<style>
+    body {
+      -webkit-font-smoothing: antialiased;
+      font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #232525;
+      padding-top:70px;
+    }
+
+    #slides,
+    #slides2,
+    #slides3 {
+      display: none;
+      /* margin-bottom:50px; */
+    }
+
+    .slidesjs-navigation {
+      margin-top:3px;
+    }
+
+    .slidesjs-previous {
+      margin-right: 5px;
+      float: left;
+    }
+
+    .slidesjs-next {
+      margin-right: 5px;
+      float: left;
+    }
+
+    .slidesjs-pagination {
+      margin: 6px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-image: url(../img/pagination.png);
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+
+    a:link,
+    a:visited {
+      color: #333
+    }
+
+    a:hover,
+    a:active {
+      color: #9e2020
+    }
+
+    .navbar {
+      overflow: hidden
+    }
+  </style>
+  <style>
+    #slides {
+      display: none
+    }
+
+    .container {
+      margin: 0 auto
+    }
+
+    /* For tablets & smart phones */
+    @media (max-width: 767px) {
+      body {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smartphones */
+    @media (max-width: 480px) {
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smaller displays like laptops */
+    @media (min-width: 768px) and (max-width: 979px) {
+      .container {
+        width: 724px
+      }
+    }
+
+    /* For larger displays */
+    @media (min-width: 1200px) {
+      .container {
+        width: 1170px
+      }
+    }
+  </style>
+</head>
+
+<body  data-spy="scroll" style="background-color: #38064C; padding:0; margin: 0;">
+<table style="width: 100%; margin: 0 auto;">
+  <tr>
+    <td colspan="4"><!--logo--><img src="../img/a.gif" /></td>
+  </tr>
+  <tr>
+    <td colspan="4">
+		<div class="container">
+		    <div id="slides2">
+		      <img src="../img/example-slide-1.jpg" alt="1.jpg"/>
+		      <img src="../img/example-slide-2.jpg" alt="2.jpg"/>
+		      <img src="../img/example-slide-3.jpg" alt="3.jpg"/>
+		      <img src="../img/example-slide-4.jpg" alt="4.jpg"/>
+		      <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left"></i></a>
+		      <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right"></i></a>
+   			</div>
+		</div>
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 25%; margin: 0 auto;"><a href="../views/exhibition_Info.html" alt="展会概况"><img src="../img/c.gif" /></a></td>
+    <td style="width: 25%; margin: 0 auto;"><a href="../views/appoint_Visit.html" alt="预约参观"><img src="../img/d.gif" /></a></td>
+    <td style="width: 25%; margin: 0 auto;"><a href="../views/enroll.html" alt="报名参展"><img src="../img/e.gif" /></a></td>
+    <td style="width: 25%; margin: 0 auto;"><a href="../views/meeting_Agenda.html" alt="会议日程"><img src="../img/f.gif" /></a></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="width: 50%; margin: 0 auto;"><a href="../views/exhibitors_Info.html" alt="展商信息"><img src="../img/g.gif" /></a></td>
+    <td colspan="2" style="width: 50%; margin: 0 auto;"><a href="../views/exhibition_Distribution.html" alt="展馆分布"><img src="../img/h.gif" /></a></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="width: 50%; margin: 0 auto;"><a href="../views/exhibit_Info.html" alt="展品介绍"><img src="../img/i.gif" /></a></td>
+    <td colspan="2" style="width: 50%; margin: 0 auto;"><a href="../views/exhibition_Guide.html" alt="展会攻略"><img src="../img/j.gif" /></a></td>
+  </tr>
+  <tr>
+    <td colspan="4"><a href="#"><img src="../img/k.gif" /></a></td>
+  </tr>
+</table>
+ <!-- SlidesJS Required: Link to jQuery -->
+  <script src="../js/jquery-1.9.1.min.js"></script>
+  <!-- End SlidesJS Required -->
+
+  <!-- SlidesJS Required: Link to jquery.slides.js -->
+  <script src="../js/jquery.slides.min.js"></script>
+  <!-- End SlidesJS Required -->
+
+  <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
+  <script>
+    $(function() {
+      $('#slides').slidesjs({
+        width: 940,
+        height: 528,
+        navigation: false
+      });
+
+      /*
+        To have multiple slideshows on the same page
+        they just need to have separate IDs
+      */
+      $('#slides2').slidesjs({
+        width: 940,
+        height: 528,
+        navigation: false,
+        start: 3,
+        play: {
+          auto: true
+        }
+      });
+
+      $('#slides3').slidesjs({
+        width: 940,
+        height: 528,
+        navigation: false
+      });
+    });
+  </script>
+  <!-- End SlidesJS Required -->
+  
+<audio autoplay="autoplay" controls="controls"loop="loop" preload="auto" src="../music/kldy.mp3">*你的浏览器不支持audio标签</audio> 
+</body>
+</html>

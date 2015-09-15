@@ -1,0 +1,16 @@
+
+/*全局样式*/
+body{ margin: 0px; padding: 0px; font-family: "宋体";}
+.hidden{ display:none;}
+img{ width: 100%;}
+.block{ height: 1em;}
+.title_info{ margin: 0 1em 5em 1em; }
+.up{ margin: -3em 0 0 0 ;}
+
+div span{ margin: 1em 0em 1em 2em; color: #1f5f9c; font-weight: bold; font-size: 1em;}
+div p{ margin: 1em 2em 1em 2em; text-indent: 2em; }
+
+
+
+.ex_info_title{ margin-left: 0.5em; font-weight:bold; color: #F67D31;}
+.ex_info_title span{ margin-left: 0.5em; color: #acafad;}
