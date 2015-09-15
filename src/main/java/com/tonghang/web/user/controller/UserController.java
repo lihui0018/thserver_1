@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.danga.MemCached.MemCachedClient;
 import com.tonghang.web.user.repository.UserDao;
 
 @Controller
@@ -17,6 +18,9 @@ public class UserController {
 
 	@Resource
 	private UserDao userDao;
+	
+	@Resource(name="memCachedClient")
+	private MemCachedClient memCachedClient;
 	
 	@RequestMapping("user")
 	public ResponseEntity<Map<String,Object>> insertUser(){
@@ -38,5 +42,11 @@ public class UserController {
 	public ResponseEntity<Map<String,Object>> transformData(){
 		userDao.insertUser();
 		return new ResponseEntity<Map<String,Object>>(userDao.insertAmount(),HttpStatus.OK);
+	}
+	
+	@RequestMapping("cache")
+	public ResponseEntity<Map<String,Object>> testCache(){
+		memCachedClient.set("aaa", "bbb1");
+		return new ResponseEntity<Map<String,Object>>(userDao.insertUser1(),HttpStatus.OK);
 	}
 }

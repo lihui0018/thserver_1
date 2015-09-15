@@ -1,8 +1,0 @@
-/* CSS Document */
-body{ background-color: #e9ecf1; margin: 0 auto; color: red;}
-div{width: 100%; text-align: center;}
-.app_title{ margin: 1em 0 1em 0 ; font-size: 2em; letter-spacing: 0.1em; text-align: center;  color: #3aa9f2;}
-input{  width: 80%; margin: 0.3em 0em 0.3em 0em; height: 2em; padding-left: 0.5em; overflow:hidden; border:#cad1dd 0.1em solid; border-radius: 0.4em; color: grey; }
-.aaa{ color: black;}
-.bbb{ color: grey;}
-.sub{ margin-top: 1em; color: black; font-weight: bold; width: 80%; height: 3em; background: #0A95FC;}
