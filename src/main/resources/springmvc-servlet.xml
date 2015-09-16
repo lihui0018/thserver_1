@@ -7,12 +7,14 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	 xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	 xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	 xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.2.xsd"
 	>
  <!-- 扫描器已经有了上面这个mvc注解驱动的功能了，所有不需要了 -->
  <context:component-scan base-package="com.tonghang.web" />
@@ -82,4 +84,16 @@
         <property name="sessionFactory" ref="sessionFactory" />  
     </bean>	
     
+     <!--  缓存  属性-->
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">    
+        <property name="configLocation"  value="classpath:ehcache.xml"/>   
+    </bean>   
+      
+    <!-- 支持缓存注解 -->  
+    <cache:annotation-driven cache-manager="cacheManager" />  
+      
+    <!-- 默认是cacheManager -->  
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">    
+        <property name="cacheManager"  ref="cacheManagerFactory"/>    
+    </bean> 
 </beans>

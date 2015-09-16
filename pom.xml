@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.tonghang</groupId>
-  <artifactId>thserver_n</artifactId>
+  <artifactId>thserver_1</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>thserver_n</name>
+  <name>thserver_1</name>
   <url>http://maven.apache.org</url>
   <properties>
       <project.build.sourceEncoding>
@@ -173,6 +173,19 @@
 		<artifactId>commons-pool</artifactId>
 		<version>1.6</version>
 	</dependency>
+	
+<!-- 	ehcache -->
+	<dependency>
+		<groupId>oro</groupId>
+		<artifactId>oro</artifactId>
+		<version>2.0.8</version>
+	</dependency>
+	<dependency>
+		<groupId>net.sf.ehcache</groupId>
+		<artifactId>ehcache-core</artifactId>
+		<version>2.6.11</version>
+	</dependency>
+	
   </dependencies>
   <build>
     <finalName>tonghang-serverapi</finalName>

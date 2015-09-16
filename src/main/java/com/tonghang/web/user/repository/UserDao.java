@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,18 +22,20 @@ public class UserDao {
 	@Resource
 	private SessionFactory sessionFactory_1;
 
+	@Cacheable(value="message",key="'user'")
 	public Map<String, Object> insertUser() {
 		UserPo u = new UserPo();
 		u.setUsername("aaa");
 		u.setEmail("a@a.a");
 		u.setPassword("123");
-		u.setTags("java,aaa,java测试");
+			u.setTags("java,aaa,java测试");
 		sessionFactory.getCurrentSession().saveOrUpdate(u);
 		Map<String, Object> m = new HashMap<>();
 		m.put("result", true);
 		return m;
 	}
 	
+	@Cacheable(value="message",key="'user1'")
 	public Map<String, Object> insertUser1() {
 		UserPo u = new UserPo();
 		u.setUsername("bbb");
