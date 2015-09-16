@@ -1,11 +1,14 @@
 package com.tonghang.web.user.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,7 +51,7 @@ public class UserDao {
 		return m;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@Transactional()
 	public Map<String, Object> insertAmount() {
 		for(int i=0;i<10000;i++){
 			UserPo u = new UserPo();
@@ -58,7 +61,28 @@ public class UserDao {
 			u.setTags("j,bbb,java实施,"+i);
 			sessionFactory.getCurrentSession().saveOrUpdate(u);
 		}
-		return (Map<String, Object>) new HashMap<>().put("result", true);
+		Map<String, Object> m = new HashMap<>();
+		m.put("result", true);
+		return m;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Cacheable(value="message",key="'amount'")
+	public Map<String, Object> queryAmount() {
+		Query q = sessionFactory.getCurrentSession().createQuery("from UserPo");
+		q.setFirstResult(0);
+		q.setMaxResults(99);
+		List<UserPo> s = q.list();
+		Map<String, Object> m = new HashMap<>();
+		m.put("result", s);
+		return m;
+	}
+	
+	@CacheEvict(value="message",key="'amount'")
+	public Map<String, Object> clearQueryAmount() {
+		Map<String, Object> m = new HashMap<>();
+		m.put("result", true);
+		return m;
 	}
 
 }

@@ -1,16 +1,18 @@
 package com.tonghang.web.user.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.danga.MemCached.MemCachedClient;
+import com.tonghang.web.user.pojo.UserPo;
 import com.tonghang.web.user.repository.UserDao;
 
 @Controller
@@ -49,5 +51,20 @@ public class UserController {
 	public ResponseEntity<Map<String,Object>> testCache(){
 		memCachedClient.set("aaa", "bbb1");
 		return new ResponseEntity<Map<String,Object>>(userDao.insertUser1(),HttpStatus.OK);
+	}
+	
+	@RequestMapping("list")
+	public ResponseEntity<Map<String,Object>> queryAmount(){
+		Map<String, Object> r = userDao.queryAmount();
+		List<UserPo> l = (List<UserPo>) r.get("result");
+		System.out.println(l.size());
+		Map<String, Object> nr = new HashMap<>();
+		nr.put("list", l.toString());
+		return new ResponseEntity<Map<String,Object>>(nr,HttpStatus.OK);
+	}
+	
+	@RequestMapping("clear")
+	public ResponseEntity<Map<String,Object>> clearQueryAmount(){
+		return new ResponseEntity<Map<String,Object>>(userDao.clearQueryAmount(),HttpStatus.OK);
 	}
 }
