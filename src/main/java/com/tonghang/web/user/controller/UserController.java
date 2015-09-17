@@ -1,5 +1,8 @@
 package com.tonghang.web.user.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.danga.MemCached.MemCachedClient;
 import com.tonghang.web.user.pojo.UserPo;
@@ -54,7 +61,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("list")
-	public ResponseEntity<Map<String,Object>> queryAmount(){
+	public @ResponseBody ResponseEntity<Map<String,Object>> queryAmount(){
 		Map<String, Object> r = userDao.queryAmount();
 		List<UserPo> l = (List<UserPo>) r.get("result");
 		System.out.println(l.size());
@@ -67,4 +74,27 @@ public class UserController {
 	public ResponseEntity<Map<String,Object>> clearQueryAmount(){
 		return new ResponseEntity<Map<String,Object>>(userDao.clearQueryAmount(),HttpStatus.OK);
 	}
+	
+	@RequestMapping("index")
+	public String index(){
+		return "index";
+	}
+	
+	@RequestMapping(value="upload",method=RequestMethod.POST)
+	public String uploadFile(@RequestParam("name") String name, @RequestParam("file") MultipartFile file){
+		if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+                stream.write(bytes);
+                stream.close();
+                return "You successfully uploaded " + name + " into " + name + "-uploaded !";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
+    }
 }
