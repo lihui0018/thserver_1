@@ -13,11 +13,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tonghang.web.user.pojo.UserPo;
+import com.tonghang.web.user.pojo.UserPo_t;
 
 @Repository
 @Transactional
-public class UserDao {
+public class UserDao_t {
 	
 	@Resource
 	private SessionFactory sessionFactory;
@@ -27,7 +27,7 @@ public class UserDao {
 
 	@Cacheable(value="message",key="'user'")
 	public Map<String, Object> insertUser() {
-		UserPo u = new UserPo();
+		UserPo_t u = new UserPo_t();
 		u.setUsername("aaa");
 		u.setEmail("a@a.a");
 		u.setPassword("123");
@@ -40,7 +40,7 @@ public class UserDao {
 	
 	@Cacheable(value="message",key="'user1'")
 	public Map<String, Object> insertUser1() {
-		UserPo u = new UserPo();
+		UserPo_t u = new UserPo_t();
 		u.setUsername("bbb");
 		u.setEmail("b@b.b");
 		u.setPassword("456");
@@ -54,7 +54,7 @@ public class UserDao {
 	@Transactional()
 	public Map<String, Object> insertAmount() {
 		for(int i=0;i<10000;i++){
-			UserPo u = new UserPo();
+			UserPo_t u = new UserPo_t();
 			u.setUsername("bbb"+i);
 			u.setEmail("b@b.b"+i);
 			u.setPassword("456"+i);
@@ -72,7 +72,7 @@ public class UserDao {
 		Query q = sessionFactory.getCurrentSession().createQuery("from UserPo");
 		q.setFirstResult(0);
 		q.setMaxResults(99);
-		List<UserPo> s = q.list();
+		List<UserPo_t> s = q.list();
 		Map<String, Object> m = new HashMap<>();
 		m.put("result", s);
 		return m;

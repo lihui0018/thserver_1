@@ -71,7 +71,7 @@
 	</bean>
  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
  	 <!-- webroot到某一指定的文件夹的路径 -->
-	 <property name="prefix" value="/"></property>
+	 <property name="prefix" value="/WEB-INF/jsp/"></property>
  	 <!-- 视图名称的后缀 -->
 	 <property name="suffix" value=".jsp"></property>
  </bean> 

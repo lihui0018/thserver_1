@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="USER")
-public class UserPo {
+public class UserPo_t {
 
 	@Id
 	@GenericGenerator(name="idGenerator",strategy="uuid")
