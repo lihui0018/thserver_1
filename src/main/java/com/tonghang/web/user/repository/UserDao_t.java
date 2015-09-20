@@ -17,8 +17,8 @@ import com.tonghang.web.common.util.Constant;
 import com.tonghang.web.user.pojo.User;
 import com.tonghang.web.user.pojo.UserPo;
 
-@Repository
 @Transactional
+@Repository
 public class UserDao_t implements IUserDao{
 	
 	@Resource

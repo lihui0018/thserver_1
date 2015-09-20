@@ -1,6 +1,6 @@
 package com.tonghang.web.user.pojo;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
@@ -68,6 +70,10 @@ public class UserPo {
 	@JoinTable(name="blacklist", joinColumns=@JoinColumn(name="client_id"), inverseJoinColumns=@JoinColumn(name="blocker_id"))
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<UserPo> blacklist;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="created_at",updatable=true)
+	private Date created_at = new Date();
 	
 	public String getId() {
 		return id;
@@ -179,6 +185,14 @@ public class UserPo {
 
 	public void setBlacklist(Set<UserPo> blacklist) {
 		this.blacklist = blacklist;
+	}
+
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
 
 }
