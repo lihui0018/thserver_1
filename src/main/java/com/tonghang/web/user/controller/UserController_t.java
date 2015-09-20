@@ -4,7 +4,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.danga.MemCached.MemCachedClient;
 import com.mchange.io.FileUtils;
-import com.tonghang.web.user.pojo.UserPo_t;
+import com.tonghang.web.user.pojo.UserPo;
 import com.tonghang.web.user.repository.UserDao_t;
 
 @Controller
@@ -69,7 +66,7 @@ public class UserController_t {
 	@RequestMapping("list")
 	public @ResponseBody ResponseEntity<Map<String,Object>> queryAmount(){
 		Map<String, Object> r = userDao_t.queryAmount();
-		List<UserPo_t> l = (List<UserPo_t>) r.get("result");
+		List<UserPo> l = (List<UserPo>) r.get("result");
 		System.out.println(l.size());
 		Map<String, Object> nr = new HashMap<>();
 		nr.put("list", l.toString());
@@ -108,8 +105,8 @@ public class UserController_t {
 		return new ResponseEntity<Map<String,Object>>(userDao_t.clearQueryAmount(),HttpStatus.OK);
     }
 	
-	@RequestMapping("download")    
-    public ResponseEntity<byte[]> download() throws IOException {    
+	@RequestMapping("download")
+    public ResponseEntity<byte[]> download() throws IOException {
         String path="D:"+File.separator+"doc-uploaded";  
         File file=new File(path);  
         HttpHeaders headers = new HttpHeaders();    

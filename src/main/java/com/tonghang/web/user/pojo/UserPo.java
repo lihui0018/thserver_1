@@ -1,18 +1,24 @@
 package com.tonghang.web.user.pojo;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="USER")
-public class UserPo_t {
+public class UserPo {
 
 	@Id
 	@GenericGenerator(name="idGenerator",strategy="uuid")
@@ -52,7 +58,17 @@ public class UserPo_t {
 	
 	@Column
 	private String tags;
+	
+	@ManyToMany()
+	@JoinTable(name="friends", joinColumns=@JoinColumn(name="client_id"), inverseJoinColumns=@JoinColumn(name="friend_id"))
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<UserPo> friends;
 
+	@ManyToMany()
+	@JoinTable(name="blacklist", joinColumns=@JoinColumn(name="client_id"), inverseJoinColumns=@JoinColumn(name="blocker_id"))
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<UserPo> blacklist;
+	
 	public String getId() {
 		return id;
 	}
@@ -148,5 +164,21 @@ public class UserPo_t {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-	
+
+	public Set<UserPo> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<UserPo> friends) {
+		this.friends = friends;
+	}
+
+	public Set<UserPo> getBlacklist() {
+		return blacklist;
+	}
+
+	public void setBlacklist(Set<UserPo> blacklist) {
+		this.blacklist = blacklist;
+	}
+
 }

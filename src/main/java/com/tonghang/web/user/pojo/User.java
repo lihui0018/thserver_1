@@ -19,7 +19,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.springframework.stereotype.Component;
 
 import com.tonghang.web.common.pojo.FeedBack;
 import com.tonghang.web.label.pojo.Label;
