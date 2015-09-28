@@ -1,27 +1,23 @@
 package com.tonghang.web.common.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import com.tonghang.web.user.pojo.UserPo;
 
 public class EmailUtil_t {
-	private static Properties pro = new Properties();
-	private static void initMail(){
-		String path = EmailUtil_t.class.getClassLoader().getResource("/").getPath(); 
-		System.out.println("initMail："+path);
-		InputStream is = EmailUtil_t.class.getResourceAsStream(path+"/mail.properties");
-		try {
-			pro.load(is);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	private static Properties pro = new Properties();
+//	private static void initMail(){
+//		String path = EmailUtil_t.class.getClassLoader().getResource("/").getPath(); 
+//		System.out.println("initMail："+path);
+//		InputStream is = EmailUtil_t.class.getResourceAsStream(path+"/mail.properties");
+//		try {
+//			pro.load(is);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	public static void sendEmail(UserPo user) {
 //		initMail();
 		JavaMailSenderImpl senderImpl = new JavaMailSenderImpl();

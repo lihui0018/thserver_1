@@ -46,10 +46,10 @@ public class UserPo {
 	@Column
 	private Date birth;
 	
-	@Column(nullable=true,columnDefinition="varchar(2) default '1'")
+	@Column(columnDefinition="varchar(2) default '1'",insertable=false)
 	public String status;
 	
-	@Column(nullable=true,columnDefinition="varchar(2) default '0'")
+	@Column(columnDefinition="varchar(2) default '0'",insertable=false)
 	private String isonline;
 	
 	@Column(length=10)
@@ -62,18 +62,26 @@ public class UserPo {
 	private String tags;
 	
 	@ManyToMany()
-	@JoinTable(name="friends", joinColumns=@JoinColumn(name="client_id"), inverseJoinColumns=@JoinColumn(name="friend_id"))
+	@JoinTable(name="friends", joinColumns=@JoinColumn(name="id"), inverseJoinColumns=@JoinColumn(name="friend_id"))
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<UserPo> friends;
 
 	@ManyToMany()
-	@JoinTable(name="blacklist", joinColumns=@JoinColumn(name="client_id"), inverseJoinColumns=@JoinColumn(name="blocker_id"))
+	@JoinTable(name="blacklist", joinColumns=@JoinColumn(name="id"), inverseJoinColumns=@JoinColumn(name="blocker_id"))
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<UserPo> blacklist;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="created_at",updatable=true)
+	@Column(name="created_at",updatable=false)
 	private Date created_at = new Date();
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="last_login_at")
+	private Date last_login_at;
+	
+	private double distance;
+	
+	private double weight;
 	
 	public String getId() {
 		return id;
@@ -193,6 +201,30 @@ public class UserPo {
 
 	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
+	}
+
+	public Date getLast_login_at() {
+		return last_login_at;
+	}
+
+	public void setLast_login_at(Date last_login_at) {
+		this.last_login_at = last_login_at;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.tonghang.web.user.repository;
 
 import java.util.List;
 
+import com.tonghang.web.location.pojo.Location;
 import com.tonghang.web.user.pojo.UserPo;
 
 public interface IUserDao {
@@ -19,5 +20,6 @@ public interface IUserDao {
 	public void deleteFriend(UserPo my,UserPo friend);
 	public void addBlocker(UserPo me,UserPo blocker);
 	public void deleteBlock(UserPo me,UserPo blcoker);
+	public List<UserPo> findUsersByLabel(String tags, boolean distance, Location location);
 	
 }

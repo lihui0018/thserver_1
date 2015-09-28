@@ -8,13 +8,15 @@ import javax.annotation.Resource;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.transform.Transformers;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.jdbc.StringUtils;
 import com.tonghang.web.common.util.Constant;
-import com.tonghang.web.user.pojo.User;
+import com.tonghang.web.location.pojo.Location;
 import com.tonghang.web.user.pojo.UserPo;
 
 @Transactional
@@ -115,7 +117,7 @@ public class UserDao_t implements IUserDao{
 
 	@Override
 	public UserPo findUserById(String client_id) {
-		return (UserPo) sessionFactory.getCurrentSession().get(User.class, client_id);
+		return (UserPo) sessionFactory.getCurrentSession().get(UserPo.class, client_id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -152,6 +154,33 @@ public class UserDao_t implements IUserDao{
 		List<UserPo> user = (List<UserPo>) query.setParameter("label_name", label_name)
 				.setFirstResult(Constant.PAGESIZE*(nowpage-1)).setMaxResults(Constant.PAGESIZE).list();
 		return user;
+	}
+
+	@Override
+	public List<UserPo> findUsersByLabel(String tags, boolean distance, Location location) {
+		String sql = "";
+		if(StringUtils.isEmptyOrWhitespaceOnly(tags)){
+			if(distance){
+				sql = "select u,round(6378.138*2*asin(sqrt(pow(sin( (l.x_point *pi()/180-"+location.getX_point()+" *pi()/180)/2),2)+cos(l.x_point*pi()/180)*cos("+location.getX_point()+"*pi()/180)*pow(sin( (l.y_point*pi()/180-"+location.getY_point()+"*pi()/180)/2),2)))*1000) as distance from UserPo u left join location l on u.id=l.client_id order by distance desc, created_at desc"; 
+			}else{
+				sql = "select u from UserPo u order by created_at desc";
+			}
+		}else{
+			String[] tagArray = tags.split(",");
+			String tagSql = "";
+			for(String tag : tagArray){
+				tagSql = tagSql + "(length(tags)-length(REPLACE(tags, '"+tag+"', '')))/length('"+tag+"')+";
+			}
+			tagSql = tagSql.substring(0,tagSql.length() - 1);
+			if(distance){
+				sql = "select u,round(6378.138*2*asin(sqrt(pow(sin( (l.x_point *pi()/180-"+location.getX_point()+" *pi()/180)/2),2)+cos(l.x_point*pi()/180)*cos("+location.getX_point()+"*pi()/180)*pow(sin( (l.y_point*pi()/180-"+location.getY_point()+"*pi()/180)/2),2)))*1000) as distance from (select UserPo," + tagSql + " as weight from UserPo) u left join location l on u.id=l.client_id order by weight desc,distance desc";
+			}else{
+				sql = "select u," + tagSql + " as weight from UserPo u order by weight desc";
+			}
+		}
+		Query query = sessionFactory.getCurrentSession().createQuery(sql);
+		List<UserPo> users = query.setFirstResult(0).setMaxResults(99).list();
+		return users;
 	}
 	
 }
