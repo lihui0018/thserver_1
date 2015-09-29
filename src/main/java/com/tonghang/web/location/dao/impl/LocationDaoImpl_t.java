@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tonghang.web.location.dao.LocationDao_t;
 import com.tonghang.web.location.pojo.Location;
+import com.tonghang.web.location.pojo.LocationPo;
 
 @Repository("locationDao_t")
 public class LocationDaoImpl_t implements LocationDao_t{
@@ -49,7 +50,7 @@ public class LocationDaoImpl_t implements LocationDao_t{
 	}
 
 	@Override
-	public void saveOrUpdateLocation(Location location) {
+	public void saveOrUpdateLocation(LocationPo location) {
 		// TODO Auto-generated method stub
 //		Session session = sessionFactory.openSession();
 //		if(!session.getTransaction().isActive()){

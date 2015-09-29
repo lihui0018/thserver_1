@@ -1,11 +1,14 @@
 package com.tonghang.web.user.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
 
 import com.mysql.jdbc.StringUtils;
 import com.tonghang.web.common.util.CommonMapUtil;
@@ -17,12 +20,14 @@ import com.tonghang.web.user.pojo.User;
 import com.tonghang.web.user.pojo.UserPo;
 import com.tonghang.web.user.service.UserService_t;
 
+@Component
 public class UserUtil_t {
-	@Resource
-	private static UserService_t userService_t;
 	
 	@Resource
-	private static FriendService friendService;
+	private UserService_t userService_t;
+	
+	@Resource
+	private FriendService friendService;
 
 	public static Map<String,Object> userToMapConvertor(UserPo user){
 		Map<String,Object> userMap = new HashMap<String, Object>();
@@ -133,12 +138,12 @@ public class UserUtil_t {
 	 * @return
 	 * notice:在推荐的同行中如果有人没有location记录，则为其设置一个默认坐标
 	 */
-	public static Map<String,Object> usersToMapConvertor(List<UserPo> users, UserPo me){
+	public Map<String,Object> usersToMapConvertor(List<UserPo> users, UserPo me){
 		List<Map<String,Object>> usersmsg = new ArrayList<Map<String,Object>>();
 		Map<String,Object> usermap = CommonMapUtil.baseMsgToMapConvertor();
 		Map<String,Object> result = new HashMap<String, Object>();
 //		List<String> label_names = new ArrayList<String>();
-		List<Boolean> is_same = new ArrayList<Boolean>();
+//		List<Boolean> is_same = new ArrayList<Boolean>();
 //		Location my_local = locationService.findLocationByUser(me);
 //		for(Label l:me.getLabellist()){
 //			label_names.add(l.getLabel_name());
@@ -154,10 +159,10 @@ public class UserUtil_t {
 			boolean is_friend = userService_t.isFriend(me.getId(), u.getId());
 			//我的标签，送给前台和推荐的用户比对，相同的就标记高亮
 			String city = "";
-			if(u.getProvince()==null||"".equals(u.getProvince()))
+			if(StringUtils.isEmptyOrWhitespaceOnly(u.getProvince()))
 				city = "未知";
-			else city = u.getCity()==null||"".equals(u.getCity())?u.getProvince():u.getProvince()+"-"+u.getCity();
-			msg.put("distance", u.getDistance());
+			else city = StringUtils.isEmptyOrWhitespaceOnly(u.getCity())?u.getProvince():u.getProvince()+"-"+u.getCity();
+			msg.put("distance", u.getDistance()==0?null:u.getDistance());
 			msg.put("labels", labels);
 			msg.put("email", u.getEmail());
 			msg.put("username", u.getUsername());
@@ -191,9 +196,15 @@ public class UserUtil_t {
 	 * @return 标识后的label名称集合
 	 */
 	private static List<String> markLabel(UserPo u, String label_names) {
+		List<String> ls = new ArrayList<>();
+		if(StringUtils.isEmptyOrWhitespaceOnly(u.getTags())){
+			return ls;
+		}
+		if(StringUtils.isEmptyOrWhitespaceOnly(label_names)){
+			return Arrays.asList(u.getTags().split(","));
+		}
 		String[] uLabels = u.getTags().split(",");
 		String[] mLabels = label_names.split(",");
-		List<String> ls = new ArrayList<>();
 		for(String l : uLabels){
 			for(String ml : mLabels){
 				if(l.indexOf(ml)>=0){
@@ -217,7 +228,6 @@ public class UserUtil_t {
 		Map<String,Object> usermap = CommonMapUtil.baseMsgToMapConvertor();
 		Map<String,Object> result = new HashMap<String, Object>();
 		List<String> label_names = new ArrayList<String>();
-		List<Boolean> is_same = new ArrayList<Boolean>();
 //		for(Label l:me.getLabellist()){
 //			label_names.add(l.getLabel_name());
 //		}

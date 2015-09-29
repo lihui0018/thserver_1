@@ -27,9 +27,9 @@ import com.tonghang.web.user.pojo.User;
 import com.tonghang.web.user.util.UserUtil;
 
 @Service
-public class TopicService {
+public class TopicService_t {
 
-	@Resource(name="topicDao")
+	@Resource(name="topicDao_t")
 	private TopicDao topicDao;
 	@Resource(name="labelDao")
 	private LabelDao labelDao;
@@ -230,5 +230,9 @@ public class TopicService {
 		topicDao.delete(topic);
 		result.put("success", topicmap);
 		return result;
+	}
+
+	public List<Topic> findTopicByUserId(String client_id, int page) {
+		return topicDao.findTopicByUserId(client_id, page);
 	}
 }

@@ -44,7 +44,7 @@ public class UserPo {
 	private String sex;
 	
 	@Column
-	private Date birth;
+	private String birth;
 	
 	@Column(columnDefinition="varchar(2) default '1'",insertable=false)
 	public String status;
@@ -131,11 +131,11 @@ public class UserPo {
 		this.sex = sex;
 	}
 
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 

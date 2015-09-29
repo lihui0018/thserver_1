@@ -21,5 +21,6 @@ public interface IUserDao {
 	public void addBlocker(UserPo me,UserPo blocker);
 	public void deleteBlock(UserPo me,UserPo blcoker);
 	public List<UserPo> findUsersByLabel(String tags, boolean distance, Location location);
+	public List<UserPo> findUsersByUsername(String username, boolean distance, Location location);
 	
 }

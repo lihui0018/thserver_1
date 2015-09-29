@@ -276,7 +276,7 @@ public class UserController_t {
 		boolean byDistance = false;
 		if(map.get("byDistance")!=null)
 			byDistance = (Boolean)map.get("byDistance");
-		return new ResponseEntity<Map<String,Object>>(userService.searchLabel(client_id,(String)map.get("label_name"),byDistance,(Integer)map.get("pageindex")), HttpStatus.OK);
+		return new ResponseEntity<Map<String,Object>>(userService_t.searchLabel(client_id,(String)map.get("label_name"),byDistance,(Integer)map.get("pageindex")), HttpStatus.OK);
 	}
 	
 	/**
@@ -320,7 +320,7 @@ public class UserController_t {
 	 */
 	@RequestMapping(value = "/{obj_id}")
 	public ResponseEntity<Map<String,Object>> userMessage(@PathVariable String obj_id,@RequestParam String client_id) {
-		return new ResponseEntity<Map<String,Object>>(userService.userMessage(obj_id,client_id), HttpStatus.OK);
+		return new ResponseEntity<Map<String,Object>>(userService_t.userMessage(obj_id,client_id), HttpStatus.OK);
 	}
 	
 	/**
@@ -343,7 +343,7 @@ public class UserController_t {
 	 */
 	@RequestMapping(value = "/update/{client_id}")
 	public ResponseEntity<Map<String,Object>> update(HttpServletRequest request,@RequestParam(required=false) CommonsMultipartFile image,@RequestParam String mapstr,@PathVariable String client_id) throws JsonParseException, JsonMappingException, IOException, UpdateUserException, NickNameExistException {
-		Map map = new ObjectMapper().readValue(mapstr, HashMap.class);
+		Map<String, Object> map = new ObjectMapper().readValue(mapstr, Map.class);
 		RequestUtil.UserImageReceiver(request, client_id, image);
 		System.out.println("username:"+(String)map.get("username")+" sex:"+(String)map.get("sex")+" birth:"+(String)map.get("birth")+" city:"+(String)map.get("city"));
 		return new ResponseEntity<Map<String,Object>>(userService.update(client_id,(String)map.get("username"),(String)map.get("sex"),(String)map.get("birth"),(String)map.get("city")), HttpStatus.OK);
@@ -366,8 +366,8 @@ public class UserController_t {
 	 */
 	@RequestMapping(value = "/update_pwd/{client_id}")
 	public ResponseEntity<Map<String,Object>> updatePassword(@RequestParam String mapstr,@PathVariable String client_id) throws JsonParseException, JsonMappingException, IOException, UpdateUserException {		
-		Map map = new ObjectMapper().readValue(mapstr, HashMap.class);
-		return new ResponseEntity<Map<String,Object>>(userService.updatePassword(client_id,(String)map.get("old_passwd"),(String)map.get("new_passwd")), HttpStatus.OK);
+		Map<String, Object> map = new ObjectMapper().readValue(mapstr, Map.class);
+		return new ResponseEntity<Map<String,Object>>(userService_t.updatePassword(client_id,(String)map.get("old_passwd"),(String)map.get("new_passwd")), HttpStatus.OK);
 	}
 	
 	/**
@@ -390,7 +390,7 @@ public class UserController_t {
 	public ResponseEntity<Map<String,Object>> updateLabel(@RequestParam String mapstr,@PathVariable String client_id) throws JsonParseException, JsonMappingException, IOException {
 		Map map = new ObjectMapper().readValue(mapstr, HashMap.class);
 		System.out.println("修改完的标签信息："+(List<String>)map.get("label_name"));
-		return new ResponseEntity<Map<String,Object>>(userService.updateLabel(client_id,(List<String>)map.get("label_name")), HttpStatus.OK);
+		return new ResponseEntity<Map<String,Object>>(userService_t.updateLabel(client_id,(List<String>)map.get("label_name")), HttpStatus.OK);
 	}
 	
 	/**
@@ -407,7 +407,7 @@ public class UserController_t {
 	@RequestMapping(value = "/topic")
 	public ResponseEntity<Map<String,Object>> userTopic(@RequestParam String mapstr) throws JsonParseException, JsonMappingException, IOException, SearchNoResultException {
 		Map map = new ObjectMapper().readValue(mapstr, HashMap.class);
-		return new ResponseEntity<Map<String,Object>>(userService.userTopic((String)map.get("client_id"),(Integer)map.get("pageindex")), HttpStatus.OK);
+		return new ResponseEntity<Map<String,Object>>(userService_t.userTopic((String)map.get("client_id"),(Integer)map.get("pageindex")), HttpStatus.OK);
 	}
 	/**
 	 * 2015-08-27新增
@@ -421,7 +421,7 @@ public class UserController_t {
 	 */
 	@RequestMapping(value="{client_id}/push")
 	public ResponseEntity<Map<String,Object>> pushNewuserToOlder(@PathVariable String client_id) throws SearchNoResultException{
-		return new ResponseEntity<Map<String,Object>>(userService.newUserRecommendation(client_id), HttpStatus.OK);
+		return new ResponseEntity<Map<String,Object>>(userService_t.newUserRecommendation(client_id), HttpStatus.OK);
 	}
 	
 	/**
@@ -441,9 +441,10 @@ public class UserController_t {
 		double x_point = (Double)map.get("x_point");
 		double y_point = (Double)map.get("y_point");
 		userService.saveUsersLocation(client_id, x_point, y_point);
-		return new ResponseEntity<Map<String,Object>>(userService.recommend(client_id,true,(Integer)map.get("pageindex")), HttpStatus.OK);
+		return new ResponseEntity<Map<String,Object>>(userService_t.recommend(client_id,true,(Integer)map.get("pageindex")), HttpStatus.OK);
 	}
 	/**
+	 * 记录用户位置所在的坐标
 	 * 
 	 * @return
 	 * @throws IOException 

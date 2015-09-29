@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.transform.Transformers;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
@@ -181,6 +180,13 @@ public class UserDao_t implements IUserDao{
 		Query query = sessionFactory.getCurrentSession().createQuery(sql);
 		List<UserPo> users = query.setFirstResult(0).setMaxResults(99).list();
 		return users;
+	}
+
+	@Override
+	public List<UserPo> findUsersByUsername(String username, boolean distance,
+			Location location) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

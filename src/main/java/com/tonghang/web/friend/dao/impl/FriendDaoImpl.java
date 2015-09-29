@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import com.tonghang.web.common.util.Constant;
 import com.tonghang.web.friend.dao.FriendDao;
 import com.tonghang.web.friend.pojo.Invitation;
 import com.tonghang.web.user.pojo.User;
@@ -60,14 +59,14 @@ public class FriendDaoImpl implements FriendDao {
 	@Override
 	public boolean isFriend(String my_id, String friend_id) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.openSession();
-		if(!session.getTransaction().isActive()){
-			session.getTransaction().begin();
-		}
+		Session session = sessionFactory.getCurrentSession();
+//		if(!session.getTransaction().isActive()){
+//			session.getTransaction().begin();
+//		}
 		User my = (User) session.get(User.class, my_id);
 		User friend = (User) session.get(User.class, friend_id);
 		boolean flag = my.getFriends().contains(friend);
-		session.close();
+//		session.close();
 		return flag;
 	}
 

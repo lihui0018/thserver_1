@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.tonghang.web.location.dao.LocationDao_t;
 import com.tonghang.web.location.pojo.Location;
-import com.tonghang.web.user.pojo.User;
+import com.tonghang.web.location.pojo.LocationPo;
+import com.tonghang.web.user.pojo.UserPo;
 
 @Service
 public class LocationService_t {
@@ -14,8 +15,8 @@ public class LocationService_t {
 	@Resource
 	private LocationDao_t locationDao_t;
 	
-	public void saveLocation(User user,double x_point,double y_point){
-		Location location = new Location();
+	public void saveLocation(UserPo user,double x_point,double y_point){
+		LocationPo location = new LocationPo();
 		location.setUser(user);
 		location.setX_point(x_point);
 		location.setY_point(y_point);

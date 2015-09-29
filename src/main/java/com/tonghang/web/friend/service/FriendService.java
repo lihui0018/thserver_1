@@ -160,5 +160,7 @@ public class FriendService {
 		return false;
 	}
 	
-	
+	public boolean isFriend(String my,String friend){
+		return friendDao.isFriend(my, friend);
+	}
 }
