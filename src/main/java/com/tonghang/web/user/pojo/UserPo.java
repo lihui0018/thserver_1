@@ -1,5 +1,6 @@
 package com.tonghang.web.user.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,8 +21,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="USER")
-public class UserPo {
+public class UserPo implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GenericGenerator(name="idGenerator",strategy="uuid")
 	@GeneratedValue(generator="idGenerator")
