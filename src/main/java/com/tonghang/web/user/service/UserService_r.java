@@ -1,12 +1,18 @@
 package com.tonghang.web.user.service;
 
+import javax.annotation.Resource;
+
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import com.tonghang.web.user.pojo.UserPo;
 
+//@Transactional
+@Service
 public class UserService_r {  
-  
-    RedisTemplate<String, UserPo> redisTemplate;  
+
+	@Resource
+    private RedisTemplate<String, UserPo> redisTemplate;  
   
     public RedisTemplate<String, UserPo> getRedisTemplate() {  
         return redisTemplate;  
